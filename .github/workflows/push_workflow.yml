@@ -30,17 +30,19 @@ jobs:
               run: mvn clean package
 
 
-            - name: Simuler un build 
-              run: |
-                mkdir -p target
-                echo "build factice" > target/app-demo.jar
-                
-            - name: Cache local Maven repository
+
+            - name: Make cache
               uses: actions/cache@v4
               with:
                 path: ~/.m2/repository
                 key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
                 restore-keys: ${{ runner.os }}-maven-
+
+            - name: Build simulation
+              run: |
+                mkdir -p target
+                echo "build factice" > target/app-demo.jar
+                
    
 
             - name: Upload artefact
