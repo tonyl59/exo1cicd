@@ -27,7 +27,7 @@ jobs:
               with:
                 path: ~/.m2/repository # telecharge en local et la met en local... on voit toutes les bibliotheques (liées aux dependances que j'ai dans mon projet) telechargées reactive-steams => Là où se met tout les externals library.
                 key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }} # Key : "tu me retelecharges toutes les dependances si le pom.xml a le moindre changement"
-                restore-keys: ${{ runner.os }}-maven-
+                restore-keys: ${{ runner.os }}-maven- # On retrouve les caches dans github -> actions -> management "Caches"
 
             
             # Etape 3 : Installation dependance
@@ -48,6 +48,8 @@ jobs:
               with:
                 name: build_app
                 path: target/*.jar
+                # Eviter de double cliquer car ca rendra difficile de l'eteindre à part le redemarrer, pour lancer l'appli .jar depuis le terminal =>
+                # java -jar [nom du fichier .jar] 
 
 
 
