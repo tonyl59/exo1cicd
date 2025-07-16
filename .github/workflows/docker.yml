@@ -16,10 +16,10 @@ jobs:
               with:
                 username: ${{ env.USERNAME }}
                 password: ${{ env.PASSWORD }}
-            - name: checkout code
+            - name: checkout code spring demoform
               uses: actions/checkout@v4
             - name: build docker image
-              run: docker build -t $USERNAME/exo3spring .
+              run: docker build -t $USERNAME/springdemoform .
  
-            - name: Get Project spring exercise 3
-              run: docker push $USERNAME/exo3spring
+            - name: Get Project spring demoform
+              run: docker push $USERNAME/springdemoform
