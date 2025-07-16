@@ -20,6 +20,15 @@ jobs:
             # Etape 2 : Récupération du projet
             - name: Checkoutproject
               uses: actions/checkout@v4
+
+
+            - name: Make cache
+              uses: actions/cache@v4
+              with:
+                path: ~/.m2/repository # telecharge en local et la met en local... on voit toutes les bibliotheques (liées aux dependances que j'ai dans mon projet) telechargées reactive-steams => Là où se met tout les externals library.
+                key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }} # Key : "tu me retelecharges toutes les dependances si le pom.xml a le moindre changement"
+                restore-keys: ${{ runner.os }}-maven-
+
             
             # Etape 3 : Installation dependance
             - name: Install dependencies
@@ -31,19 +40,7 @@ jobs:
 
 
 
-            - name: Make cache
-              uses: actions/cache@v4
-              with:
-                path: ~/.m2/repository
-                key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-                restore-keys: ${{ runner.os }}-maven-
 
-            - name: Build simulation
-              run: |
-                mkdir -p target
-                echo "build factice" > target/app-demo.jar
-                
-   
 
             - name: Upload artefact
               if: success() && github.ref == 'refs/heads/main'
