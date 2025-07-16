@@ -1,0 +1,12 @@
+name: mon context
+
+on: fork
+
+jobs:
+    info:
+        runs-on : ubuntu-latest
+        steps:
+            - name: Fork
+              run: echo "new project fork made"
+
+    

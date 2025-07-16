@@ -1,0 +1,21 @@
+name: Issue creation alert
+on:
+    issues:
+        types: opened
+
+jobs:
+    commentaire:
+        runs-on: ubuntu-latest
+        permissions:
+            issues: write
+        steps:
+            - name: Answer to issue
+              env:
+                ISSUE_URL: ${{ github.event.issue.html_url}}
+                AUTHOR_NAME: ${{github.event.issue.actor}}
+                ISSUE_NAME: ${{github.event.issue.event}}
+              run: gh issue comment $ISSUE_URL --body "Bonjour $AUTHOR_NAME, nous avons pris en compte votre probleme du nom de :/ $ISSUE_NAME"
+
+
+    
+
