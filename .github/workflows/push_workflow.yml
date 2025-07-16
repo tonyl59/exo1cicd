@@ -34,6 +34,14 @@ jobs:
               run: |
                 mkdir -p target
                 echo "build factice" > target/app-demo.jar
+                
+            - name: Cache local Maven repository
+              uses: actions/cache@v4
+              with:
+                path: ~/.m2/repository
+                key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+                restore-keys: ${{ runner.os }}-maven-
+   
 
             - name: Upload artefact
               if: success() && github.ref == 'refs/heads/main'
